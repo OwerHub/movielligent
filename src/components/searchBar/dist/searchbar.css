@@ -1,0 +1,9 @@
+.searchBarContainer {
+  background-color: yellow;
+  display: flex;
+  justify-content: space-around;
+}
+.searchBarContainer .searchWrapper {
+  display: flex;
+  gap: 2rem;
+}
