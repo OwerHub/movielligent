@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
-import "./dist/appContainer.css";
 import { movieResponse, oneMovie } from "../../types/movietypes";
+import "./dist/appContainer.css";
 
 import { getSearchedMovies } from "../../services/fetch";
 import { SearchBar } from "../searchBar/SearchBar";
 import { CardContainer } from "../CardContainer/CardContainer";
+import {Footer} from '../Footer/Footer'
 
 export const AppContainer = () => {
   const [isMovies, setmMovies] = useState<movieResponse>();
   const [isSeachText, setSearchText] = useState<string>("");
   // később lehet destructingolni az actualpage-t, meg az egyéb adatokat
   // esetleg useDispatch-el megkenni
-  const [isPage, setPage] = useState(1);
+  const [isPage, setPage] = useState(2);
 
   const getData = async () => {
      console.log("start fetcg")
@@ -32,7 +33,7 @@ export const AppContainer = () => {
 if (isSeachText.length > 3) {
    getData();
 }
- }, [isSeachText]);
+ }, [isSeachText , isPage]);
 
 
   return (
@@ -50,7 +51,8 @@ if (isSeachText.length > 3) {
       </section>
 
       <footer>
-         <div>
+        <Footer actualPage={isPage} maxPage={isMovies?.total_pages} pageSetter={(page)=>{setPage(page)}}/>
+    {/*      <div>
             <div>
             searchText is: {isSeachText}
             </div>
@@ -61,7 +63,7 @@ if (isSeachText.length > 3) {
 
             total results  is : {isMovies?.total_results}
             </div>
-         </div>
+         </div> */}
       </footer>
     </div>
   );

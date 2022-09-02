@@ -1,3 +1,11 @@
 .outerContainer {
-  background-color: deepskyblue;
+  background-color: darkblue;
+}
+
+.cardWrapper {
+  padding: 2rem 0.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

@@ -21,9 +21,9 @@ const tryArray = [
   return (
     <div className="outerContainer">
       {props.movieList ? (
-        <div>
+        <div className="cardWrapper">
           {props.movieList.map((data, iterator)=> (
-            <Card movieData={data}/>    
+            <Card movieData={data} key={`card${iterator}`}/>    
           ))}
         </div>
       ) : (
