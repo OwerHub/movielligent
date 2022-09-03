@@ -17,6 +17,10 @@ export const AppContainer = () => {
   // esetleg useDispatch-el megkenni
   const [isPage, setPage] = useState(0);
 
+ const env = process.env.API_KEY
+
+ console.log("API KEY isa" , env)
+
   const getData = async () => {
     console.log("getData");
     //console.log("start fetch");

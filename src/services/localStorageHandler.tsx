@@ -25,13 +25,9 @@ export const addMovieToLocalStorage = (movieData: oneMovie) => {
 export const deleteMovieFromList = (id:number) => {
     let movieList = window.localStorage.getItem("movielligent");
   
-
-
    if (movieList) {
         movieList = JSON.parse(movieList);
       }
-    
-      //console.log(movieList)
     
       let setMovieList;
     

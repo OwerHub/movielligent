@@ -1,6 +1,7 @@
 import "./dist/card.css";
 import { oneMovie } from "../../types/movietypes";
 import {addMovieToLocalStorage} from '../../services/localStorageHandler'
+import placeholderPic from "../../img/movieNotFound.jpg"
 
 interface CardProps {
   movieData: oneMovie;
@@ -9,11 +10,11 @@ interface CardProps {
 export const Card = (props: CardProps) => {
 
     const addToFavorite =(cardData:oneMovie)=> {
-
         addMovieToLocalStorage(cardData)
    /*      console.log("favorite") */
    /*      console.log(cardData.title) */
     }
+
 
 
   return (
@@ -27,7 +28,7 @@ export const Card = (props: CardProps) => {
           alt={props.movieData.poster_path}
         />
       ) : (
-        <div>No picture found</div>
+        <img className="cardPosterPic" src={placeholderPic} alt="" />
       )}
 
       <div 

@@ -11,6 +11,7 @@ export const SearchBar = (props: searchBarProps) => {
 const [isSearchtext, setSearchText] = useState<string>("")
 
     const searchButtonHandler = () =>{
+      
       console.log("search pushed")
       props.searchFunction()
       
