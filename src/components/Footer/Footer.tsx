@@ -21,7 +21,7 @@ export const Footer = (props: footerPorp) => {
     ); */
     if (maxPage <= 5 || actualPage <=2) {
       //console.log("max less then 5");
-      return arrayGenarator(1, 5);
+      return arrayGenarator(1, maxPage);
     }
 
     if (actualPage + 2 >= maxPage) {
@@ -44,6 +44,7 @@ export const Footer = (props: footerPorp) => {
       <div>This page is : {props.actualPage}</div>
       <div>MAx is {props.maxPage}</div>
       <div className="paginationWrapper">
+
         {propChecker(props.actualPage, props.maxPage) &&
           paginatorArrayGenerator(
             props.actualPage as number,

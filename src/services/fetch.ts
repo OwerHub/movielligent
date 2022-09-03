@@ -18,7 +18,7 @@ export async function getSearchedMovies<T>({
 }: searchQueryParameters): Promise<T> {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${decodeURI(
     searchText
-  )}&page=${pageMinimum(actualPage)}&include_adult=true`;
+  )}&page=${pageMinimum(actualPage)}&include_adult=false`;
 
   const { data } = await axios.get(url);
   return data;

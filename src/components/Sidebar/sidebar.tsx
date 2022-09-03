@@ -35,7 +35,7 @@ export const Sidebar = () => {
 
         
             <FavoriteCard 
-             key={`FavoriteCard${iterator}`}
+             key={`FavoriteCard${movie.id}`}
              movieData={movie}
              />
 

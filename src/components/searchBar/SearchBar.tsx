@@ -1,40 +1,54 @@
 import { useState } from "react";
 import "./dist/searchbar.css";
 
-interface searchBarProps  {
-    searchTextSetter: (searchText: string) => void
-    searchFunction: () => void
+interface searchBarProps {
+  searchTextSetter: (searchText: string) => void;
+  searchFunction: () => void;
 }
 
 export const SearchBar = (props: searchBarProps) => {
+  const [isSearchtext, setSearchText] = useState<string>("");
 
-const [isSearchtext, setSearchText] = useState<string>("")
+  const searchButtonHandler = () => {
 
-    const searchButtonHandler = () =>{
-      
-      console.log("search pushed")
-      props.searchFunction()
-      
-    }
+    console.log(isSearchtext.length >3)
+    if(isSearchtext.length>3) {
 
-    const inputChangeHandler = (searchText: string) => {
-        //console.log(searchText)
-        setSearchText(searchText)
-        props.searchTextSetter(searchText)
-    }
+      console.log("search pushed");
+      props.searchFunction();
+    } 
+
+  };
+
+  const enterHandle = () =>  {
+    searchButtonHandler()
+  };
+
+
+  const inputChangeHandler = (searchText: string) => {
+    //console.log(searchText)
+    setSearchText(searchText);
+    props.searchTextSetter(searchText);
+  };
 
 
   return (
     <div className="searchBarContainer">
-      
-
       <div className="searchWrapper">
         <div>Search a movie</div>
-        <input type="text" name="searchInput" onChange={(e) => inputChangeHandler(e.target.value) }  />
-        <button onClick={()=>searchButtonHandler()} disabled={isSearchtext.length<=3}>search</button>
+        <input
+          type="text"
+          name="searchInput"
+          onChange={(e) => inputChangeHandler(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && enterHandle()  }
+        />
+        <button
+          onClick={() => searchButtonHandler()}
+          disabled={isSearchtext.length <= 3}
+        >
+          search
+        </button>
       </div>
- 
-      
 
       <div className="checkboxWrapper">
         <div>
@@ -42,8 +56,6 @@ const [isSearchtext, setSearchText] = useState<string>("")
           <input type="checkbox" name="adultCheck" />
         </div>
       </div>
-  
-
     </div>
   );
 };
