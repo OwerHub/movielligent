@@ -1,3 +1,4 @@
+import "./dist/sidebar.css"
 import { useState, useEffect } from "react";
 
 import { oneMovie } from "../../types/movietypes";
@@ -26,7 +27,7 @@ export const Sidebar = () => {
   }, []);
 
   return (
-    <div>
+    <div className="sideBarContainer">
       this is sidebar
       <button onClick={()=>getLocalStorage()}>refresh</button>
       {isMovieList &&

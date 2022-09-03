@@ -9,7 +9,6 @@ interface FavoriteCardProps {
 
 export const FavoriteCard = (props: FavoriteCardProps) => {
 
-
     const deleteFromFavorites = (cardID:number) =>{
         console.log(cardID)
         deleteMovieFromList(cardID)
@@ -18,8 +17,10 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
 
   return (
     <div className="favoriteCardWrapper">
+
       <div>{props.movieData.title}</div>
       <div>{props.movieData.release_date}</div>
+      
       <div>
         {props.movieData.poster_path ? (
           <img

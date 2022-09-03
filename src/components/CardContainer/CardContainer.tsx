@@ -8,16 +8,6 @@ interface cardContainerProps {
 
 export const CardContainer = (props: cardContainerProps) => {
 
-const tryArray = [
-"valami",
-"valami",
-"valami",
-"valami",
-"valami",
-"valami"
-]
-
-
   return (
     <div className="outerContainer">
       {props.movieList ? (

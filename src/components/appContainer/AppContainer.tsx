@@ -11,52 +11,46 @@ import { Sidebar } from "../Sidebar/sidebar";
 export const AppContainer = () => {
   const [isMovies, setmMovies] = useState<movieResponse>();
   const [isSeachText, setSearchText] = useState<string>("");
+
   // később lehet destructingolni az actualpage-t, meg az egyéb adatokat
   // esetleg useDispatch-el megkenni
-  const [isPage, setPage] = useState(2);
+  const [isPage, setPage] = useState(1);
 
   const getData = async () => {
-    //console.log("start fetcg");
+              //console.log("start fetch");
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
       actualPage: isPage,
     });
     setmMovies(data);
-    //console.log("end fetch");
+              //console.log("end fetch");
   };
 
-  useEffect(() => {
-    //getData();
-    //console.log(isMovies);
-  }, []);
+  const searchMovies =():void =>{
+    getData()
+  }
 
   useEffect(() => {
-    if (isSeachText.length > 3) {
-      getData();
-    }
-  }, [isSeachText, isPage]);
+      searchMovies()
+  }, [ isPage]);
 
   return (
     <div className="appContainer">
+
       <header>
         this is header
         <SearchBar
-          searchSetter={(searchText) => {
+          searchTextSetter={(searchText) => {
             setSearchText(searchText);
           }}
+          searchFunction={()=>searchMovies()}
         />
       </header>
 
       <section className="body">
-  
         <CardContainer movieList={isMovies?.results} />
-
-        <Sidebar/>
+        <Sidebar />
       </section>
-
- {/*      <article className="sidebar" >
-        Hello
-      </article> */}
 
       <footer>
         <Footer
@@ -67,6 +61,7 @@ export const AppContainer = () => {
           }}
         />
       </footer>
+      
     </div>
   );
 };
