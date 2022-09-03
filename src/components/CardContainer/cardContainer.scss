@@ -1,9 +1,10 @@
 .outerContainer{
     background-color: darkblue;
+    width: 80vw;
 }
 .cardWrapper{
     padding: 2rem .5rem;
-    
+ 
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;

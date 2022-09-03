@@ -1,6 +1,7 @@
 .cardOuter {
   background-color: darkred;
   width: 20vw;
+  min-width: 200px;
   padding: 1rem 0.2rem;
   display: flex;
   flex-direction: column;

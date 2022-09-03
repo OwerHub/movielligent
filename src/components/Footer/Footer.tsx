@@ -20,16 +20,16 @@ export const Footer = (props: footerPorp) => {
       "in paginationGenerator actual: " + actualPage + "max" + maxPage
     ); */
     if (maxPage <= 5 || actualPage <=2) {
-      console.log("max less then 5");
+      //console.log("max less then 5");
       return arrayGenarator(1, 5);
     }
 
     if (actualPage + 2 >= maxPage) {
-      console.log("Actual almost edn");
+      //console.log("Actual almost edn");
       return arrayGenarator(maxPage - 4, maxPage);
     }
 
-    console.log("page OK ")
+    //console.log("page OK ")
 
     return arrayGenarator(actualPage - 2, actualPage + 2);
   };

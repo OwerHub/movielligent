@@ -1,11 +1,21 @@
 import "./dist/card.css";
 import { oneMovie } from "../../types/movietypes";
+import {addMovieToLocalStorage} from '../../services/localStorageHandler'
 
 interface CardProps {
   movieData: oneMovie;
 }
 
 export const Card = (props: CardProps) => {
+
+    const addToFavorite =(cardData:oneMovie)=> {
+
+        addMovieToLocalStorage(cardData)
+   /*      console.log("favorite") */
+   /*      console.log(cardData.title) */
+    }
+
+
   return (
     <div className="cardOuter">
       <div>Title: {props.movieData.title}</div>
@@ -19,6 +29,13 @@ export const Card = (props: CardProps) => {
       ) : (
         <div>No picture found</div>
       )}
+
+      <div 
+            className="favoriteButton"
+            onClick={()=> addToFavorite(props.movieData)}
+            >
+        add to favorite
+      </div>
     </div>
   );
 };
