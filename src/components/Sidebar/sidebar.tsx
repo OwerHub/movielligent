@@ -1,5 +1,8 @@
-import { oneMovie } from "../../types/movietypes";
 import { useState, useEffect } from "react";
+
+import { oneMovie } from "../../types/movietypes";
+import { FavoriteCard } from "../favoriteCard/FavoriteCard";
+
 
 export const Sidebar = () => {
   const [isMovieList, setMovieList] = useState<oneMovie[] | null>();
@@ -13,7 +16,7 @@ export const Sidebar = () => {
     if (movieList === null) {
         setMovieList(null)
     }
-    
+
   };
 
 
@@ -25,8 +28,20 @@ export const Sidebar = () => {
   return (
     <div>
       this is sidebar
+      <button onClick={()=>getLocalStorage()}>refresh</button>
       {isMovieList &&
-        isMovieList.map((movie, iterator) => <div>{movie.title}</div>)}
+       isMovieList.map((movie, iterator) =>
+
+        
+            <FavoriteCard 
+             key={`FavoriteCard${iterator}`}
+             movieData={movie}
+             />
+
+        )
+        }
+
+
     </div>
   );
 };
