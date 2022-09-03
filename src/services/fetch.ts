@@ -8,6 +8,9 @@ interface searchQueryParameters {
 // ezt majd ENV_ből
 const APIKey = "0e5e769f060ca0f15ec6dbad6a46c3b4";
 
+const pageMinimum = (pageNumber: number) :number=>{
+  return pageNumber >= 1 ? pageNumber : 1
+}
 
 export async function getSearchedMovies<T>({
   searchText,
@@ -15,7 +18,7 @@ export async function getSearchedMovies<T>({
 }: searchQueryParameters): Promise<T> {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=en-US&query=${decodeURI(
     searchText
-  )}&page=${actualPage}&include_adult=true`;
+  )}&page=${pageMinimum(actualPage)}&include_adult=true`;
 
   const { data } = await axios.get(url);
   return data;

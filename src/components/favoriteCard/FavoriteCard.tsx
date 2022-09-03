@@ -1,4 +1,5 @@
 import { oneMovie } from "../../types/movietypes";
+import { useState } from "react";
 import "./dist/favoriteCard.css";
 import {deleteMovieFromList} from "../../services/localStorageHandler"
 
@@ -8,6 +9,8 @@ interface FavoriteCardProps {
 }
 
 export const FavoriteCard = (props: FavoriteCardProps) => {
+
+    const [isSureOpen, setSureOpen] = useState<Boolean>(false)
 
     const deleteFromFavorites = (cardID:number) =>{
         console.log(cardID)
@@ -33,8 +36,9 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
         )}
       </div>
 
-    <div className="deleteFavoriteButton" onClick={()=>deleteFromFavorites(props.movieData.id)}>
-        Delete This Card
+    <div className="deleteFavoriteButton"
+            onClick={()=> isSureOpen? deleteFromFavorites(props.movieData.id) : setSureOpen(true)}>
+        {isSureOpen? "Are You Sure? " : "Delete This Card"}
     </div>
 
     </div>

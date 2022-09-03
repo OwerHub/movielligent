@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { movieResponse, oneMovie } from "../../types/movietypes";
 import "./dist/appContainer.css";
+import searchJson from "../../datas/searches.json";
 
 import { getSearchedMovies } from "../../services/fetch";
 import { SearchBar } from "../searchBar/SearchBar";
@@ -14,36 +15,43 @@ export const AppContainer = () => {
 
   // később lehet destructingolni az actualpage-t, meg az egyéb adatokat
   // esetleg useDispatch-el megkenni
-  const [isPage, setPage] = useState(1);
+  const [isPage, setPage] = useState(0);
 
   const getData = async () => {
-              //console.log("start fetch");
+    console.log("getData");
+    //console.log("start fetch");
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
-      actualPage: isPage,
+      actualPage: (isPage),
     });
     setmMovies(data);
-              //console.log("end fetch");
+    //console.log("end fetch");
   };
 
-  const searchMovies =():void =>{
-    getData()
-  }
+  const searchMovies = (): void => {
+    setPage(1);
+
+    console.log("searchMovies");
+
+    getData();
+  };
 
   useEffect(() => {
-      searchMovies()
-  }, [ isPage]);
+    if (isPage > 0) {
+      console.log("useEffect");
+      getData();
+    }
+  }, [isPage]);
 
   return (
     <div className="appContainer">
-
       <header>
         this is header
         <SearchBar
           searchTextSetter={(searchText) => {
             setSearchText(searchText);
           }}
-          searchFunction={()=>searchMovies()}
+          searchFunction={() => searchMovies()}
         />
       </header>
 
@@ -53,15 +61,16 @@ export const AppContainer = () => {
       </section>
 
       <footer>
-        <Footer
-          actualPage={isPage}
-          maxPage={isMovies?.total_pages}
-          pageSetter={(page) => {
-            setPage(page);
-          }}
-        />
+        {isPage > 0 && (
+          <Footer
+            actualPage={isPage}
+            maxPage={isMovies?.total_pages}
+            pageSetter={(page) => {
+              setPage(page);
+            }}
+          />
+        )}
       </footer>
-      
     </div>
   );
 };
