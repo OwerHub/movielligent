@@ -22,7 +22,7 @@ export const AppContainer = () => {
  console.log("API KEY isa" , env) */
 
   const getData = async () => {
-    console.log("getData");
+  
     //console.log("start fetch");
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
@@ -35,14 +35,14 @@ export const AppContainer = () => {
   const searchMovies = (): void => {
     setPage(1);
 
-    console.log("searchMovies");
+    //console.log("searchMovies");
 
     getData();
   };
 
   useEffect(() => {
+    //console.log("useEffect");
     if (isPage > 0) {
-      console.log("useEffect");
       getData();
     }
   }, [isPage]);
