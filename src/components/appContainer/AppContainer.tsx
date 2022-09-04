@@ -14,6 +14,9 @@ import { Footer } from "../Footer/Footer";
 import { Sidebar } from "../Sidebar/sidebar";
 
 export const AppContainer = () => {
+
+  //localStorage.removeItem('movielligent');
+
   const [isMovies, setmMovies] = useState<movieResponse>();
   const [isSeachText, setSearchText] = useState<string>("");
 
