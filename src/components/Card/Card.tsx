@@ -22,7 +22,7 @@ export const Card = (props: CardProps) => {
        dispatch(changeState(Number(response.length)))
     }
 
-  
+  // start
 
 
   return (
