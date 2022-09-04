@@ -1,24 +1,15 @@
 import "./dist/footer.css";
 
-// redux toolkit 
-
-
-
+// redux toolkit
 
 interface footerPorp {
   pageSetter: (page: number) => void;
   actualPage?: number;
   maxPage?: number;
+  /* maxResults?: number; */
 }
 
 export const Footer = (props: footerPorp) => {
-
-
-
-
-
-
-
   const arrayGenarator = (min: number, max: number) => {
     return Array(max - min + 1)
       .fill(0)
@@ -27,20 +18,16 @@ export const Footer = (props: footerPorp) => {
 
   const paginatorArrayGenerator = (actualPage: number, maxPage: number) => {
     if (maxPage <= 5) {
-      console.log("page if 1")
       return arrayGenarator(1, maxPage);
     }
-    
-    if(actualPage <= 2) {
-      return arrayGenarator(1, 5)
+
+    if (actualPage <= 2) {
+      return arrayGenarator(1, 5);
     }
 
     if (actualPage + 2 >= maxPage) {
-      console.log("page if 2")
       return arrayGenarator(maxPage - 4, maxPage);
     }
-
-   
 
     return arrayGenarator(actualPage - 2, actualPage + 2);
   };
@@ -52,9 +39,14 @@ export const Footer = (props: footerPorp) => {
 
   return (
     <div className="footerContainer">
-      <div>This page is : {props.actualPage}</div>
-      <div>MAx is {props.maxPage}</div>
+      <div className="writeDatas">
+
+     
+      {/* <div>All result is: {props.maxResults} in {props.actualPage} page</div> */}
+      </div>
       <div className="paginationWrapper">
+
+    
 
         {propChecker(props.actualPage, props.maxPage) &&
           paginatorArrayGenerator(
@@ -62,7 +54,7 @@ export const Footer = (props: footerPorp) => {
             props.maxPage as number
           ).map((pagenumber) => (
             <div
-              className={` ${
+              className={` pageButton ${
                 pagenumber === props.actualPage && "selectedButton"
               }`}
               key={`pageButton${pagenumber}`}
@@ -71,12 +63,8 @@ export const Footer = (props: footerPorp) => {
               {pagenumber}
             </div>
           ))}
-          
       </div>
-      <div>
-   
-
-      </div>
+      <div></div>
     </div>
   );
 };

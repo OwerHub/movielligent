@@ -47,8 +47,8 @@ export const Sidebar = () => {
 
   return (
     <div className="sideBarContainer">
-      this is sidebar
-      <button onClick={() => setLocalToMovieList()}>refresh</button>
+      Favorites
+     {/*  <button onClick={() => setLocalToMovieList()}>refresh</button> */}
       {isMovieList &&
         isMovieList.map((movie) => (
           <FavoriteCard key={`FavoriteCard${movie.id}`} movieData={movie} />

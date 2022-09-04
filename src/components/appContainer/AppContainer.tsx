@@ -67,6 +67,7 @@ export const AppContainer = () => {
         {isPage > 0 && (
           <Footer
             actualPage={isPage}
+            /* maxResults={isMovies?.total_results} */
             maxPage={isMovies?.total_pages}
             pageSetter={(page) => {
               setPage(page);
@@ -75,7 +76,9 @@ export const AppContainer = () => {
         )}
       </footer>
 
-      {/*  <LoadingSpinner/> */}
+
+    {isLloading &&  <LoadingSpinner/>}
+   {/*    <LoadingSpinner/> */} 
     </div>
   );
 };

@@ -27,10 +27,10 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
   return (
     <div className="favoriteCardWrapper">
 
-      <div>{props.movieData.title}</div>
-      <div>{props.movieData.release_date}</div>
+      <div className="title">{props.movieData.title}</div>
+   
       
-      <div>
+      <div className="imageContainer">
         {props.movieData.poster_path ? (
           <img
             className="favoriteCardPosterPic"

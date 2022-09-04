@@ -1,6 +1,9 @@
-.sideBarContainer{
-
+.sideBarContainer{  
     width: 20vw;
     background-color: green;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
 }

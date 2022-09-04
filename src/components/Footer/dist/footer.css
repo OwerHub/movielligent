@@ -1,5 +1,5 @@
 .footerContainer {
-  padding: 1 rem;
+  padding: 1rem;
 }
 
 .selectedButton {
@@ -12,14 +12,19 @@
   justify-content: center;
   gap: 1rem;
 }
-.paginationWrapper div {
+
+.pageButton {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
-  padding: 5px;
-  border-radius: 3px;
+  padding: 10px;
+  border-radius: 50%;
   border: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: border-radius 0.2s;
+}
+.pageButton:hover {
+  border-radius: 5px;
 }

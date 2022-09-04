@@ -6,17 +6,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     padding:.3rem;
+    border-radius: .5rem;
 
 }
 
 .favoriteCardPosterPic{
-    width:150px;
+    width:15vw;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .deleteFavoriteButton{
-    background-color: red;
-    padding: .3rem;
+    margin: .5rem 0;
+    background-color: rgb(255, 144, 144);
+    padding: .5rem;
     border-radius: .5rem;
     cursor: pointer;
+    transition: s .2s;
+    &:hover{
+        background-color: red;
+        transform: scale(1.1);
+    }
+}
+
+.title{
+    font-weight: bolder;
+    margin: .5rem 0;
 }
