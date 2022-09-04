@@ -3,16 +3,23 @@ import { oneMovie } from "../../types/movietypes";
 import {addMovieToLocalStorage} from '../../services/localStorageHandler'
 import placeholderPic from "../../img/movieNotFound.jpg"
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { increment, decrement, changeState, } from "../../store/reducers";
+
+
 interface CardProps {
   movieData: oneMovie;
 }
 
 export const Card = (props: CardProps) => {
 
+  const dispatch = useDispatch();
+
     const addToFavorite =(cardData:oneMovie)=> {
-        addMovieToLocalStorage(cardData)
-   /*      console.log("favorite") */
-   /*      console.log(cardData.title) */
+        const response = (addMovieToLocalStorage(cardData))   
+  
+       dispatch(changeState(Number(response.length)))
     }
 
   

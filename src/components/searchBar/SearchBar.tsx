@@ -52,7 +52,7 @@ export const SearchBar = (props: searchBarProps) => {
 
       <div className="checkboxWrapper">
         <div>
-          <span>Adult</span>
+          <span>Valami más</span>
           <input type="checkbox" name="adultCheck" />
         </div>
       </div>

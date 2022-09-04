@@ -3,6 +3,9 @@ import { useState } from "react";
 import "./dist/favoriteCard.css";
 import {deleteMovieFromList} from "../../services/localStorageHandler"
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { increment, decrement, changeState, } from "../../store/reducers";
 
 interface FavoriteCardProps {
   movieData: oneMovie;
@@ -12,9 +15,12 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
 
     const [isSureOpen, setSureOpen] = useState<Boolean>(false)
 
+    const dispatch = useDispatch();
+
+
     const deleteFromFavorites = (cardID:number) =>{
-        console.log(cardID)
-        deleteMovieFromList(cardID)
+         const response= deleteMovieFromList(cardID)
+         dispatch(changeState(Number(response.length)))
     }
 
 

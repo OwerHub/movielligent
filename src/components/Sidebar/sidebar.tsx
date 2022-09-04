@@ -1,5 +1,9 @@
 import "./dist/sidebar.css"
 import { useState, useEffect } from "react";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { increment, decrement, changeState, } from "../../store/reducers";
 
 import { oneMovie } from "../../types/movietypes";
 import { FavoriteCard } from "../favoriteCard/FavoriteCard";
@@ -7,29 +11,48 @@ import { FavoriteCard } from "../favoriteCard/FavoriteCard";
 
 export const Sidebar = () => {
   const [isMovieList, setMovieList] = useState<oneMovie[] | null>();
+  const arrayNumber = useSelector((state: RootState) => state.counter.value);
 
-  const getLocalStorage = () => {
+  const dispatch = useDispatch()
+
+  const getLocalStorage= () => {
     let movieList = window.localStorage.getItem("movielligent");
-
     if (movieList !== null) {
-      setMovieList(JSON.parse(movieList) )
+      return(JSON.parse(movieList) )
     }
     if (movieList === null) {
-        setMovieList(null)
+        return(null)
     }
+  }
 
+  const setLocalToMovieList = () => {
+    setMovieList(getLocalStorage)
   };
+
+
+  function arrayLengthChange(incrementAmountValue: number) {
+    dispatch(changeState(Number(incrementAmountValue)));
+  }
+
+useEffect(() => {
+  setLocalToMovieList()
+}, [useSelector((state: RootState) => state.counter.value)])
 
 
 
   useEffect(() => {
-    getLocalStorage();
+    //setLocalToMovieList();
+    if(getLocalStorage()){
+      arrayLengthChange(getLocalStorage().length)
+    } else {
+      arrayLengthChange(0)
+    }
   }, []);
 
   return (
     <div className="sideBarContainer">
       this is sidebar
-      <button onClick={()=>getLocalStorage()}>refresh</button>
+      <button onClick={()=>setLocalToMovieList()}>refresh</button>
       {isMovieList &&
        isMovieList.map((movie, iterator) =>
 
