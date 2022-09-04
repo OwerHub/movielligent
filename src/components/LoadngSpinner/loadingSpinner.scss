@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.loadingSpinnerContainer{
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    //background-color: #333;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spinner{
+    width: 200px;
+    height: 200px;
+    border-top: 20px solid #1aff1a;
+    border-right: 20px solid transparent;
+    border-radius: 50%;
+    animation-name: spinner;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.circle{
+    width: 20px;
+    height: 20px;
+    background-color: #1aff1a;
+    border-radius: 50%;
+    margin-left: 155px;
+    margin-top: 8px;
+}
+@keyframes spinner{
+    100%{
+        transform: rotate(360deg);
+    }
+}

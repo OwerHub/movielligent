@@ -29,8 +29,10 @@ export const addMovieToLocalStorage = (movieData: oneMovie) => {
     } else {
       setMovieList = [...movieList, movieData];
     }
-
   }
+
+
+  
 
 
   window.localStorage.setItem("movielligent", JSON.stringify(setMovieList));

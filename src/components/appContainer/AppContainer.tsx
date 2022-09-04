@@ -3,36 +3,29 @@ import { movieResponse, oneMovie } from "../../types/movietypes";
 import "./dist/appContainer.css";
 //import searchJson from "../../datas/searches.json";
 
-
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
-
 import { getSearchedMovies } from "../../services/fetch";
 import { SearchBar } from "../searchBar/SearchBar";
 import { CardContainer } from "../CardContainer/CardContainer";
 import { Footer } from "../Footer/Footer";
 import { Sidebar } from "../Sidebar/sidebar";
+import { HeadTitle } from "../HeadTitle/HeadTitle";
+import { LoadingSpinner } from "../LoadngSpinner/LoadingSpinner";
 
 export const AppContainer = () => {
-
   //localStorage.removeItem('movielligent');
 
   const [isMovies, setmMovies] = useState<movieResponse>();
   const [isSeachText, setSearchText] = useState<string>("");
 
-  // később lehet destructingolni az actualpage-t, meg az egyéb adatokat
-  // esetleg useDispatch-el megkenni
   const [isPage, setPage] = useState(0);
-
+  const [isLloading, setLoading] = useState(false);
   // Redux-toolkit input state
-  const arrayNumber = useSelector((state: RootState) => state.counter.value);
-
 
   const getData = async () => {
     //console.log("start fetch");
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
-      actualPage: (isPage),
+      actualPage: isPage,
     });
     setmMovies(data);
     //console.log("end fetch");
@@ -44,7 +37,6 @@ export const AppContainer = () => {
   };
 
   useEffect(() => {
-    //console.log("useEffect");
     if (isPage > 0) {
       getData();
     }
@@ -53,10 +45,7 @@ export const AppContainer = () => {
   return (
     <div className="appContainer">
       <header>
-        this is header
-        <div>
-          arraynumber is  {arrayNumber}
-        </div>
+        <HeadTitle />
         <SearchBar
           searchTextSetter={(searchText) => {
             setSearchText(searchText);
@@ -64,6 +53,10 @@ export const AppContainer = () => {
           searchFunction={() => searchMovies()}
         />
       </header>
+
+      <section>
+        
+      </section>
 
       <section className="body">
         <CardContainer movieList={isMovies?.results} />
@@ -81,6 +74,8 @@ export const AppContainer = () => {
           />
         )}
       </footer>
+
+      {/*  <LoadingSpinner/> */}
     </div>
   );
 };

@@ -1,9 +1,7 @@
 import "./dist/footer.css";
 
 // redux toolkit 
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
-import { increment, decrement, changeState, } from "../../store/reducers";
+
 
 
 
@@ -15,17 +13,8 @@ interface footerPorp {
 
 export const Footer = (props: footerPorp) => {
 
-// Redux toolkit stuffs
 
-const dispatch = useDispatch();
 
-const incrementAmount = useSelector(
-    (state: RootState) => state.counter.incrementAmount
-  );
-
-  function handleChange(incrementAmountValue: number) {
-    dispatch(changeState(Number(incrementAmountValue)));
-  }
 
 
 
@@ -37,13 +26,21 @@ const incrementAmount = useSelector(
   };
 
   const paginatorArrayGenerator = (actualPage: number, maxPage: number) => {
-    if (maxPage <= 5 || actualPage <= 2) {
+    if (maxPage <= 5) {
+      console.log("page if 1")
       return arrayGenarator(1, maxPage);
+    }
+    
+    if(actualPage <= 2) {
+      return arrayGenarator(1, 5)
     }
 
     if (actualPage + 2 >= maxPage) {
+      console.log("page if 2")
       return arrayGenarator(maxPage - 4, maxPage);
     }
+
+   
 
     return arrayGenarator(actualPage - 2, actualPage + 2);
   };
@@ -77,9 +74,7 @@ const incrementAmount = useSelector(
           
       </div>
       <div>
-      <button onClick={() => dispatch(increment())}>Increase</button>
-                <button onClick={() => dispatch(decrement())}>decrease </button>
-                <button onClick={()=> handleChange(15)}>set to</button>
+   
 
       </div>
     </div>
