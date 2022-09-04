@@ -1,5 +1,12 @@
 import "./dist/footer.css";
 
+// redux toolkit 
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
+import { increment, decrement, changeState, } from "../../store/reducers";
+
+
+
 interface footerPorp {
   pageSetter: (page: number) => void;
   actualPage?: number;
@@ -7,29 +14,36 @@ interface footerPorp {
 }
 
 export const Footer = (props: footerPorp) => {
-  const arrayGenarator = (min: number, max: number) => {
-    //return [...Array(end - start + 1).keys()].map(x => x + start)
 
+// Redux toolkit stuffs
+
+const dispatch = useDispatch();
+
+const incrementAmount = useSelector(
+    (state: RootState) => state.counter.incrementAmount
+  );
+
+  function handleChange(incrementAmountValue: number) {
+    dispatch(changeState(Number(incrementAmountValue)));
+  }
+
+
+
+
+  const arrayGenarator = (min: number, max: number) => {
     return Array(max - min + 1)
       .fill(0)
       .map((_, i) => min + i);
   };
 
   const paginatorArrayGenerator = (actualPage: number, maxPage: number) => {
-    /*    console.log(
-      "in paginationGenerator actual: " + actualPage + "max" + maxPage
-    ); */
-    if (maxPage <= 5 || actualPage <=2) {
-      //console.log("max less then 5");
+    if (maxPage <= 5 || actualPage <= 2) {
       return arrayGenarator(1, maxPage);
     }
 
     if (actualPage + 2 >= maxPage) {
-      //console.log("Actual almost edn");
       return arrayGenarator(maxPage - 4, maxPage);
     }
-
-    //console.log("page OK ")
 
     return arrayGenarator(actualPage - 2, actualPage + 2);
   };
@@ -50,14 +64,24 @@ export const Footer = (props: footerPorp) => {
             props.actualPage as number,
             props.maxPage as number
           ).map((pagenumber) => (
-            <div 
-            className={` ${pagenumber === props.actualPage && "selectedButton"}`}
-            key={`pageButton${pagenumber}`}
-            onClick={()=>props.pageSetter(pagenumber)}
-            >{pagenumber}</div>
+            <div
+              className={` ${
+                pagenumber === props.actualPage && "selectedButton"
+              }`}
+              key={`pageButton${pagenumber}`}
+              onClick={() => props.pageSetter(pagenumber)}
+            >
+              {pagenumber}
+            </div>
           ))}
+          
       </div>
-      <div>helykitöltő</div>
+      <div>
+      <button onClick={() => dispatch(increment())}>Increase</button>
+                <button onClick={() => dispatch(decrement())}>decrease </button>
+                <button onClick={()=> handleChange(15)}>set to</button>
+
+      </div>
     </div>
   );
 };

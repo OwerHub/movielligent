@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { movieResponse, oneMovie } from "../../types/movietypes";
 import "./dist/appContainer.css";
-import searchJson from "../../datas/searches.json";
+//import searchJson from "../../datas/searches.json";
+
+
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store/store";
 
 import { getSearchedMovies } from "../../services/fetch";
 import { SearchBar } from "../searchBar/SearchBar";
@@ -17,12 +21,11 @@ export const AppContainer = () => {
   // esetleg useDispatch-el megkenni
   const [isPage, setPage] = useState(0);
 
-/*  const env = process.env.API_KEY
+  // Redux-toolkit input state
+  const arrayNumber = useSelector((state: RootState) => state.counter.value);
 
- console.log("API KEY isa" , env) */
 
   const getData = async () => {
-  
     //console.log("start fetch");
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
@@ -34,9 +37,6 @@ export const AppContainer = () => {
 
   const searchMovies = (): void => {
     setPage(1);
-
-    //console.log("searchMovies");
-
     getData();
   };
 
@@ -51,6 +51,9 @@ export const AppContainer = () => {
     <div className="appContainer">
       <header>
         this is header
+        <div>
+          arraynumber is  {arrayNumber}
+        </div>
         <SearchBar
           searchTextSetter={(searchText) => {
             setSearchText(searchText);
