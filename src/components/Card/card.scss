@@ -3,14 +3,43 @@
   width: 20vw;
   min-width: 200px;
   padding: 1rem 0.2rem;
+  border-radius: .5rem;
 
   display: flex;
   flex-direction: column;
-  //justify-content: center;
+  justify-content: space-between  ;
   align-items: center;
 }
 
+
+.cardTitle{
+  font-weight: bolder;
+  font-size: large;
+  width: 80%;
+  text-align: center;
+}
+
+.cardPicContainer{
+  margin: 1rem 0;
+  overflow: hidden;
+}
 .cardPosterPic {
   width: 150px;
-  margin: .5rem 0 0 ;
+  height: 210px;
+  object-fit: cover;
+}
+
+.movieYear{
+  height: 1.2rem;
+}
+.favoriteButton{
+  padding: .5rem;
+  border-radius: .3rem;
+  background-color: red;
+  cursor: pointer;
+  transition:  .2s;
+  &:hover{
+    color: whitesmoke;
+    transform: translate(2px, 2px)
+  }
 }

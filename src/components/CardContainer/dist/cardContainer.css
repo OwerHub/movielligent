@@ -10,3 +10,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+.cardContainerPlaceholder {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: large;
+  text-transform: uppercase;
+}

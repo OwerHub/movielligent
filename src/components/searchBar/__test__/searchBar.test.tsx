@@ -41,7 +41,7 @@ describe("searchBar", () => {
     expect(buttonElement).toBeDisabled();
   });
 
-  test("should button enabled after type 4 character", () => {
+  test("should button enabled after type four character", () => {
     render(
       <SearchBar
         searchFunction={mockedSetTodo}

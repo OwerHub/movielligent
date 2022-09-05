@@ -22,7 +22,6 @@ export const AppContainer = () => {
   // Redux-toolkit input state
 
   const getData = async () => {
-    //console.log("start fetch");
     setLoading(true)
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
@@ -30,7 +29,7 @@ export const AppContainer = () => {
     });
     setmMovies(data);
     setLoading(false)
-    //console.log("end fetch");
+
   };
 
   const searchMovies = (): void => {
@@ -50,7 +49,9 @@ export const AppContainer = () => {
         <HeadTitle />
         <SearchBar
           searchTextSetter={(searchText) => {
-            setSearchText(searchText);
+            if(searchText.length>3){
+              setSearchText(searchText);
+            }
           }}
           searchFunction={() => searchMovies()}
         />

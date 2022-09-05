@@ -1,0 +1,55 @@
+import { oneMovie, movieResponse } from "../types/movietypes";
+
+// [poster OK, poster null, release date null ]
+export const movieDatas: oneMovie[] = [
+  {
+    adult: false,
+    backdrop_path: "/fv4XvbQW2NDEXV8Zdxhmv0wHuu3.jpg",
+    genre_ids: [28, 53, 14],
+    id: 752,
+    original_language: "en",
+    original_title: "V for Vendetta",
+    overview:
+      "In a world in which Great Britain has become a fascist state, a masked vigilante known only as “V” conducts guerrilla warfare against the oppressive British government. When V rescues a young woman from the secret police, he finds in her an ally with whom he can continue his fight to free the people of Britain.",
+    popularity: 50.015,
+    poster_path: "/2ySXWBckQboalTZjhaLWRqc3gCN.jpg",
+    release_date: "2006-02-23",
+    title: "V for Vendetta",
+    video: false,
+    vote_average: 7.9,
+    vote_count: 12515,
+  },
+  {
+    adult: false,
+    backdrop_path: null,
+    genre_ids: [35, 18, 27, 10749],
+    id: 683169,
+    original_language: "en",
+    original_title: "Local Haunts",
+    overview:
+      "In hopes of hiding in plain sight, three vampiric ladies have made the eerie beach community of Lost Cove their home. As they attempt to reckon with the ever present struggle of immortality, old flames reappear and budding romances arise, all while the rift between the spirit world and ours collides.",
+    popularity: 1.527,
+    poster_path: null,
+    release_date: "2022-12-31",
+    title: "Local Haunts",
+    video: false,
+    vote_average: 0,
+    vote_count: 0,
+  },
+  {
+    adult: false,
+    backdrop_path: null,
+    genre_ids: [],
+    id: 560017,
+    original_language: "en",
+    original_title: "Local Hero",
+    overview: "Written & Directed By Luke Evans  A Frodaddy Production",
+    popularity: 0.673,
+    poster_path: "/gkCFs1gSIDloSZfCg1cAF0leJnH.jpg",
+    release_date: "",
+    title: "Local Hero",
+    video: false,
+    vote_average: 10,
+    vote_count: 1,
+  },
+];

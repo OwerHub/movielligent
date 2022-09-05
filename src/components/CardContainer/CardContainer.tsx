@@ -17,7 +17,7 @@ export const CardContainer = (props: cardContainerProps) => {
           ))}
         </div>
       ) : (
-        <div>nincs adat</div>
+        <div className="cardContainerPlaceholder">No Dispayed Movie</div>
       )}
     </div>
   );
