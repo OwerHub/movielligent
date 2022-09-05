@@ -56,8 +56,9 @@ export const Footer = (props: footerPorp) => {
             paginatorArrayGenerator(
               props.actualPage as number,
               props.maxPage as number
-            ).map((pagenumber) => (
+            ).map((pagenumber, iterator) => (
               <div
+                data-testid={`pageButton-${iterator}`}
                 className={` pageButton ${
                   pagenumber === props.actualPage && "selectedButton"
                 }`}
