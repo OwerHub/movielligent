@@ -21,13 +21,13 @@ const RenderWithProvider: React.FC<renderProps> = ({ movie }) => {
 };
 
 describe("MovieCard", () => {
-  test("Should render the given title", () => {
+  test("Should render the given year", () => {
     render(<RenderWithProvider movie={movieDatas[0]} />);
     const titleDiv = screen.getByText(movieDatas[0].release_date.slice(0, 4));
     expect(titleDiv).toBeInTheDocument();
   });
 
-  test("Should render the given year ", () => {
+  test("Should render the given title ", () => {
     render(<RenderWithProvider movie={movieDatas[0]} />);
     const titleDiv = screen.getByText(movieDatas[0].title);
     expect(titleDiv).toBeInTheDocument();

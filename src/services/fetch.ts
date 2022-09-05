@@ -7,7 +7,8 @@ interface searchQueryParameters {
 
 // ezt majd ENV_ből
 const APIKey = "0e5e769f060ca0f15ec6dbad6a46c3b4";
-
+console.log("api key in Fetch", process.env.REACT_APP_API_KEY)
+console.log("api key2 in Fetch ", process.env.REACT_APP_API_KEY2)
 const pageMinimum = (pageNumber: number) :number=>{
   return pageNumber >= 1 ? pageNumber : 1
 }
