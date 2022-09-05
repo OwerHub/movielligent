@@ -50,7 +50,7 @@ export const Footer = (props: footerPorp) => {
   return (
     <div className="footerContainer">
       <div className="paginatonWrapper">
-        <div className="endMakers">{minChecker() && `1 . . .`}</div>
+        <div className="endMakers">{minChecker() && <div data-testid="startMarker">1 . . .</div>}</div>
         <div className="buttonWrapper">
           {propChecker(props.actualPage, props.maxPage) &&
             paginatorArrayGenerator(
@@ -70,7 +70,7 @@ export const Footer = (props: footerPorp) => {
         </div>
 
         <div className="endMakers">
-          {maxChecker() && `. . . ${props.maxPage} `}
+          {maxChecker() && <div data-testid="endMarker">. . . {props.maxPage}</div>}
         </div>
       </div>
     </div>

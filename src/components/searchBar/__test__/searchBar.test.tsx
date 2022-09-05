@@ -4,7 +4,7 @@ import { SearchBar } from "../SearchBar";
 
 const mockedSetTodo = jest.fn();
 
-describe("searchBar", () => {
+describe("searchBar ", () => {
   // a TS valamiért nem engedi a BeforeEach-el megcsinálni
 
   test("should input is rendered", () => {
