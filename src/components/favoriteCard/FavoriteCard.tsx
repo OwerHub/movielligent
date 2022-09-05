@@ -9,7 +9,9 @@ import { increment, decrement, changeState, } from "../../store/reducers";
 
 interface FavoriteCardProps {
   movieData: oneMovie;
+  iterator: number
 }
+
 
 export const FavoriteCard = (props: FavoriteCardProps) => {
 
@@ -25,10 +27,10 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
 
 
   return (
-    <div className="favoriteCardWrapper">
+    <div className="favoriteCardWrapper" data-testid={`favoritecard-${props.iterator}`}>
 
       <div className="title">{props.movieData.title}</div>
-   
+      
       
       <div className="imageContainer">
         {props.movieData.poster_path ? (

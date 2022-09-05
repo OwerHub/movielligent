@@ -13,6 +13,8 @@ const getMovieFromLocalStorage= ()=>{
 
 
 export const addMovieToLocalStorage = (movieData: oneMovie) => {
+
+
   let movieList = window.localStorage.getItem("movielligent");
   if (movieList) {
     movieList = JSON.parse(movieList);

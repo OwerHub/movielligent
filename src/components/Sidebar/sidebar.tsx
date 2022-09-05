@@ -45,13 +45,15 @@ export const Sidebar = () => {
     }
   }, []);
 
+
+
   return (
     <div className="sideBarContainer">
       Favorites
      {/*  <button onClick={() => setLocalToMovieList()}>refresh</button> */}
       {isMovieList &&
-        isMovieList.map((movie) => (
-          <FavoriteCard key={`FavoriteCard${movie.id}`} movieData={movie} />
+        isMovieList.map((movie, iterator) => (
+          <FavoriteCard key={`FavoriteCard${movie.id}`} iterator={iterator} movieData={movie} />
         ))}
     </div>
   );

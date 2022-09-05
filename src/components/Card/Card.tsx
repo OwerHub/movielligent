@@ -12,18 +12,24 @@ interface CardProps {
   movieData: oneMovie;
 }
 
-export const Card = (props: CardProps) => {
+export const Card:React.FC<CardProps> = (props) => {
 
   const dispatch = useDispatch();
 
     const addToFavorite =(cardData:oneMovie)=> {
-        const response = (addMovieToLocalStorage(cardData))   
-  
+
+      //console.log("add favorite s")
+      const response = (addMovieToLocalStorage(cardData))   
+
        dispatch(changeState(Number(response.length)))
+
+        //console.log(response)
+
     }
 
   // start
 
+  
 
   return (
     <div className="cardOuter">

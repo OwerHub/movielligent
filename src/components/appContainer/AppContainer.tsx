@@ -18,16 +18,18 @@ export const AppContainer = () => {
   const [isSeachText, setSearchText] = useState<string>("");
 
   const [isPage, setPage] = useState(0);
-  const [isLloading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   // Redux-toolkit input state
 
   const getData = async () => {
     //console.log("start fetch");
+    setLoading(true)
     const data = await getSearchedMovies<movieResponse>({
       searchText: isSeachText,
       actualPage: isPage,
     });
     setmMovies(data);
+    setLoading(false)
     //console.log("end fetch");
   };
 
@@ -77,7 +79,7 @@ export const AppContainer = () => {
       </footer>
 
 
-    {isLloading &&  <LoadingSpinner/>}
+    {isLoading &&  <LoadingSpinner/>}
    {/*    <LoadingSpinner/> */} 
     </div>
   );
