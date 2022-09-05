@@ -53,13 +53,9 @@ export const AppContainer = () => {
               setSearchText(searchText);
             }
           }}
-          searchFunction={() => searchMovies()}
+          searchFunction={() => searchMovies()}   // simán át lehet adni 
         />
       </header>
-
-      <section>
-        
-      </section>
 
       <section className="body">
         <CardContainer movieList={isMovies?.results} />
@@ -70,7 +66,6 @@ export const AppContainer = () => {
         {isPage > 0 && (
           <Footer
             actualPage={isPage}
-            /* maxResults={isMovies?.total_results} */
             maxPage={isMovies?.total_pages}
             pageSetter={(page) => {
               setPage(page);
@@ -81,7 +76,6 @@ export const AppContainer = () => {
 
 
     {isLoading &&  <LoadingSpinner/>}
-   {/*    <LoadingSpinner/> */} 
     </div>
   );
 };

@@ -30,7 +30,7 @@ export const Card: React.FC<CardProps> = (props) => {
 
   
       <div className="movieYear">
-        {props.movieData.release_date.slice(0, 4)}
+        {props.movieData.release_date?.slice(0, 4)}
         </div>
 
       <div className="cardPicContainer">

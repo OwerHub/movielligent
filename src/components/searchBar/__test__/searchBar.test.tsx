@@ -1,11 +1,13 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent,  } from "@testing-library/react";
 
 import { SearchBar } from "../SearchBar";
 
 const mockedSetTodo = jest.fn();
 
 describe("searchBar", () => {
-  // a TS valamiért nem engedi a BeforeEach-el megcsinálni
+
+  // a TS blocked beforeeach / beforeAll render
+
 
   test("should input is rendered", () => {
     render(

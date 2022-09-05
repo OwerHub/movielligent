@@ -4,19 +4,23 @@ import "./dist/footer.css";
 
 interface footerPorp {
   pageSetter: (page: number) => void;
-  actualPage?: number;
+  actualPage?: number ;
   maxPage?: number;
-  /* maxResults?: number; */
 }
 
-export const Footer = (props: footerPorp) => {
+export const Footer = ({actualPage=0, maxPage=0, pageSetter}: footerPorp ) => {
   const arrayGenarator = (min: number, max: number) => {
     return Array(max - min + 1)
       .fill(0)
       .map((_, i) => min + i);
   };
 
-  const paginatorArrayGenerator = (actualPage: number, maxPage: number) => {
+  // ötöt  és kettőt elnevezni, hogy tudjuk 
+
+// asnumber    
+
+
+  const paginatorArrayGenerator = (actualPage: number =0, maxPage: number =0) => {
     if (maxPage <= 5) {
       return arrayGenarator(1, maxPage);
     }
@@ -38,32 +42,33 @@ export const Footer = (props: footerPorp) => {
 
   const maxChecker = () => {
     return (
-      (props.maxPage as number) > 5 &&
-      (props.actualPage as number) + 2 < (props.maxPage as number)
-    );
+      maxPage  > 5 &&
+      actualPage + 2 < maxPage )
   };
 
   const minChecker = () => {
-    return (props.maxPage as number) > 5 && (props.actualPage as number) > 3;
+    return maxPage  > 5 && actualPage  > 3;
   };
 
   return (
     <div className="footerContainer">
       <div className="paginatonWrapper">
-        <div className="endMakers">{minChecker() && <div data-testid="startMarker">1 . . .</div>}</div>
+        <div className="endMakers">
+          {minChecker() && <div data-testid="startMarker">1 . . .</div>}
+        </div>
         <div className="buttonWrapper">
-          {propChecker(props.actualPage, props.maxPage) &&
+          {propChecker(actualPage, maxPage) &&
             paginatorArrayGenerator(
-              props.actualPage as number,
-              props.maxPage as number
+              actualPage ,
+              maxPage 
             ).map((pagenumber, iterator) => (
               <div
                 data-testid={`pageButton-${iterator}`}
                 className={` pageButton ${
-                  pagenumber === props.actualPage && "selectedButton"
+                  pagenumber === actualPage && "selectedButton"
                 }`}
                 key={`pageButton${pagenumber}`}
-                onClick={() => props.pageSetter(pagenumber)}
+                onClick={() => pageSetter(pagenumber)}
               >
                 {pagenumber}
               </div>
@@ -71,7 +76,9 @@ export const Footer = (props: footerPorp) => {
         </div>
 
         <div className="endMakers">
-          {maxChecker() && <div data-testid="endMarker">. . . {props.maxPage}</div>}
+          {maxChecker() && (
+            <div data-testid="endMarker">. . . {maxPage}</div>
+          )}
         </div>
       </div>
     </div>
