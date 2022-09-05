@@ -43,7 +43,7 @@ const RenderWithProvider:React.FC<renderProps> = ({movie}) => {
     )
 }
 
-test("render MovieCard" , ()=> {
+test("render MovieCard " , ()=> {
     render(<RenderWithProvider movie={movieObject}/>)
     
     const titleDiv = screen.getByText(/V for Vendetta/i)

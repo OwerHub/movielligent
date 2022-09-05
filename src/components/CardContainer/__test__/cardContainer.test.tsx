@@ -1,3 +1,4 @@
+
 import { render, screen, fireEvent } from "@testing-library/react";
 import { movieDatas } from "../../../datas/testDatas";
 import { oneMovie } from "../../../types/movietypes";
@@ -21,7 +22,7 @@ const RenderWithProvider: React.FC<cardContainerProps> = ({
   );
 };
 
-describe("cardContainer", () => {
+describe("cardContainer ", () => {
   test("should not render cards when the movieArray is null", () => {
     render(<RenderWithProvider />);
     const divElement = screen.queryByText(/favorite/i);
