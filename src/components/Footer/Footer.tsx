@@ -32,39 +32,47 @@ export const Footer = (props: footerPorp) => {
     return arrayGenarator(actualPage - 2, actualPage + 2);
   };
 
-  // ezt  ki lehet váltani valahogyan
   const propChecker = (act: number | undefined, max: number | undefined) => {
     return typeof act === "number" && typeof max === "number";
   };
 
+  const maxChecker = () => {
+    return (
+      (props.maxPage as number) > 5 &&
+      (props.actualPage as number) + 2 < (props.maxPage as number)
+    );
+  };
+
+  const minChecker = () => {
+    return (props.maxPage as number) > 5 && (props.actualPage as number) > 3;
+  };
+
   return (
     <div className="footerContainer">
-      <div className="writeDatas">
+      <div className="paginatonWrapper">
+        <div className="endMakers">{minChecker() && `1 . . .`}</div>
+        <div className="buttonWrapper">
+          {propChecker(props.actualPage, props.maxPage) &&
+            paginatorArrayGenerator(
+              props.actualPage as number,
+              props.maxPage as number
+            ).map((pagenumber) => (
+              <div
+                className={` pageButton ${
+                  pagenumber === props.actualPage && "selectedButton"
+                }`}
+                key={`pageButton${pagenumber}`}
+                onClick={() => props.pageSetter(pagenumber)}
+              >
+                {pagenumber}
+              </div>
+            ))}
+        </div>
 
-     
-      {/* <div>All result is: {props.maxResults} in {props.actualPage} page</div> */}
+        <div className="endMakers">
+          {maxChecker() && `. . . ${props.maxPage} `}
+        </div>
       </div>
-      <div className="paginationWrapper">
-
-    
-
-        {propChecker(props.actualPage, props.maxPage) &&
-          paginatorArrayGenerator(
-            props.actualPage as number,
-            props.maxPage as number
-          ).map((pagenumber) => (
-            <div
-              className={` pageButton ${
-                pagenumber === props.actualPage && "selectedButton"
-              }`}
-              key={`pageButton${pagenumber}`}
-              onClick={() => props.pageSetter(pagenumber)}
-            >
-              {pagenumber}
-            </div>
-          ))}
-      </div>
-      <div></div>
     </div>
   );
 };

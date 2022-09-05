@@ -2,22 +2,28 @@
   padding: 1rem;
 }
 
-.selectedButton {
-  background-color: black;
-  color: whitesmoke;
+.paginatonWrapper {
+  display: flex;
+  justify-content: center;
 }
-
-.paginationWrapper {
+.paginatonWrapper .buttonWrapper {
+  margin: 0 1rem;
   display: flex;
   justify-content: center;
   gap: 1rem;
+}
+.paginatonWrapper .endMakers {
+  width: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pageButton {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
-  padding: 10px;
+  padding: 15px;
   border-radius: 50%;
   border: 2px solid black;
   display: flex;
@@ -27,4 +33,9 @@
 }
 .pageButton:hover {
   border-radius: 5px;
+}
+
+.selectedButton {
+  background-color: black;
+  color: whitesmoke;
 }
