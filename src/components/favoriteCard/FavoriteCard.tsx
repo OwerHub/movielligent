@@ -35,7 +35,7 @@ export const FavoriteCard = (props: FavoriteCardProps) => {
           <img
             className="favoriteCardPosterPic"
             src={`https://image.tmdb.org/t/p/original/${props.movieData.poster_path}`}
-            alt={`moviePoster-${props.movieData.poster_path}`}
+            alt={`favoriteMoviePoster-${props.movieData.poster_path}`}
           />
         ) : (
           <img
