@@ -14,7 +14,6 @@ import { Footer } from "../Footer/Footer";
 import { Sidebar } from "../Sidebar/sidebar";
 import { HeadTitle } from "../HeadTitle/HeadTitle";
 import { LoadingSpinner } from "../LoadngSpinner/LoadingSpinner";
-import { setTextRange } from "typescript";
 
 export const AppContainer = () => {
   //localStorage.removeItem('movielligent');
@@ -26,37 +25,69 @@ export const AppContainer = () => {
   const [isLoading, setLoading] = useState(false);
   // Redux-toolkit input state
 
-  const [isCacheSearches, setCacheSearches] = useState<cachedSearchType | []>(
-    []
-  );
-  const [isPreviousSearchKey, setPreviousSearchKey] = useState<string>("");
+  const [isCacheSearches, setCacheSearches] = useState<cachedSearchType[]>([]);
 
-  const getData = async (searchtext:string| undefined) => {
+  const getData = async (searchtext: string | undefined) => {
     setLoading(true);
 
-    let actualSearchtext: string
-
-    if(searchtext === undefined) {
-      actualSearchtext = isSeachText
-    }  else {
-      actualSearchtext = searchtext
+    // ez még kiszervezhető
+    let actualSearchtext: string;
+    if (searchtext === undefined) {
+      actualSearchtext = isSeachText;
+    } else {
+      actualSearchtext = searchtext;
     }
 
+    ///----
+
+
+    /// Ez is 
     let foundSearchInCached: cachedSearchType | undefined;
 
-    const data: movieResponse = await getSearchedMovies<movieResponse>({
-      searchText: actualSearchtext,
-      actualPage: isPage,
-    });
+    if (isCacheSearches.length !== 0) {
+      foundSearchInCached = isCacheSearches.find(
+        (cachedSearch) =>
+          cachedSearch.pageNumber === isPage &&
+          cachedSearch.searchText === actualSearchtext
+      );
+    }
+    //-----
 
-    setmMovies(data);
-    setLoading(false);
+
+    /// maradhat
+    if (foundSearchInCached?.searchResponse !== undefined) {
+      setmMovies(foundSearchInCached.searchResponse);
+      setLoading(false);
+    }
+
+    if (foundSearchInCached === undefined) {
+      
+      
+      // megint csak kiszervezhető
+      const data: movieResponse = await getSearchedMovies<movieResponse>({
+        searchText: actualSearchtext,
+        actualPage: isPage,
+      });
+
+      setCacheSearches((prevArray) => [
+        ...prevArray,
+        {
+          searchText: actualSearchtext,
+          pageNumber: isPage,
+          searchResponse: data,
+        },
+      ]);
+
+      setmMovies(data);
+      setLoading(false);
+
+      // eddig
+
+    }
   };
 
-
-  const searchButtonHandler = (searchText:string): void => {
-
-    setSearchText(searchText)
+  const searchButtonHandler = (searchText: string): void => {
+    setSearchText(searchText);
     setPage(1);
     getData(searchText);
   };
@@ -72,11 +103,6 @@ export const AppContainer = () => {
       <header>
         <HeadTitle />
         <SearchBar
-       /*    searchTextSetter={(searchText) => {
-            if (searchText.length > 3) {
-              setSearchText(searchText);
-            }
-          }} */
           searchFunction={(searchText) => searchButtonHandler(searchText)} // simán át lehet adni
         />
       </header>
