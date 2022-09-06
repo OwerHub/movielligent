@@ -34,6 +34,7 @@ export const SearchBar = (props: searchBarProps) => {
           name="searchInput"
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && enterHandle()  }
+          placeholder="enter the title"
         />
         <button
           onClick={() => searchButtonHandler(isSearchtext)}
