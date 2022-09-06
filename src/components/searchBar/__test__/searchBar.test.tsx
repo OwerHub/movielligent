@@ -1,14 +1,10 @@
-import { render, screen, fireEvent,  } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 import { SearchBar } from "../SearchBar";
 
 const mockedSetTodo = jest.fn();
 
 describe("searchBar", () => {
-
-  // a TS blocked beforeeach / beforeAll render
-
-
   test("should input is rendered", () => {
     render(
       <SearchBar
@@ -56,8 +52,6 @@ describe("searchBar", () => {
     fireEvent.change(inputElement, { target: { value: "Vendetta" } });
     expect(buttonElement).toBeEnabled();
   });
-
-
 
   test("should searchButton fired the function", () => {
     let gettedButton: string = "not pushed";

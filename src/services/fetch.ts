@@ -1,5 +1,5 @@
 import axios from "axios";
-import { cachedSearchType, movieResponse, oneMovie } from "../types/movietypes";
+
 
 interface searchQueryParameters {
   searchText: string;
@@ -9,8 +9,6 @@ interface searchQueryParameters {
 const pageMinimum = (pageNumber: number): number => {
   return pageNumber >= 1 ? pageNumber : 1;
 };
-
-let cachedSerches: cachedSearchType[];
 
 export async function getSearchedMovies<T>({
   searchText,
@@ -22,7 +20,11 @@ export async function getSearchedMovies<T>({
     actualPage
   )}&include_adult=false`;
 
-  const { data } = await axios.get(url);
+  const response = await axios.get(url);
 
-  return data;
+  if (response) {
+    return response.data;
+  }
+
+  return {} as T;
 }

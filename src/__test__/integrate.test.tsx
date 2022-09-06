@@ -6,7 +6,6 @@ import { oneMovie } from "../components/../types/movietypes";
 import { CardContainer } from "../components/CardContainer/CardContainer";
 import { movieDatas } from "../datas/testDatas";
 
-
 import { Provider } from "react-redux";
 import { store } from "../components/../store/store";
 
@@ -15,7 +14,7 @@ interface cardsRenderProps {
 }
 
 interface cardContainersRenderProps {
-    movieList: oneMovie[]
+  movieList: oneMovie[];
 }
 
 const CardsRenderWithProvider: React.FC<cardsRenderProps> = ({ movie }) => {
@@ -27,18 +26,18 @@ const CardsRenderWithProvider: React.FC<cardsRenderProps> = ({ movie }) => {
   );
 };
 
-const CardContainersRenderWithProvider: React.FC<cardContainersRenderProps> = ({ movieList }) => {
-    return (
-      <Provider store={store}>
-        <CardContainer movieList={movieList} />
-        <Sidebar />
-      </Provider>
-    );
-  };
-
+const CardContainersRenderWithProvider: React.FC<cardContainersRenderProps> = ({
+  movieList,
+}) => {
+  return (
+    <Provider store={store}>
+      <CardContainer movieList={movieList} />
+      <Sidebar />
+    </Provider>
+  );
+};
 
 describe("actionBetweenCards", () => {
-
   test("should not render favoriteCard, when the localstorage empty", () => {
     localStorage.removeItem("movielligent");
     render(<CardsRenderWithProvider movie={movieDatas[0]} />);
@@ -74,7 +73,6 @@ describe("actionBetweenCards", () => {
     expect(favoriteCard).not.toBeInTheDocument();
   });
 
-  
   test("should not add one Moviecard twice to favorite", () => {
     localStorage.removeItem("movielligent");
     render(<CardsRenderWithProvider movie={movieDatas[0]} />);
@@ -86,44 +84,37 @@ describe("actionBetweenCards", () => {
     const favoriteCard = screen.getByText(/delete this card/i);
     expect(favoriteCard).toBeInTheDocument();
   });
-
 });
 
+describe("actions between CardContainer and Sidebar", () => {
+  test("should add 3 different card to Favorites", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardContainersRenderWithProvider movieList={movieDatas} />);
 
+    const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i);
+    addToFavoriteButtons.forEach((button) => {
+      fireEvent.click(button);
+    });
 
-describe("actions between CardContainer and Sidebar" , ()=> {
+    const deleteButtons = screen.getAllByText(/delete/i);
 
-    test("should add 3 different card to Favorites" , ()=> {
-        localStorage.removeItem("movielligent");
-        render(<CardContainersRenderWithProvider movieList={movieDatas} />);
+    expect(deleteButtons.length).toBe(3);
+  });
 
-        const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i)       
-        addToFavoriteButtons.forEach(button => {
-            fireEvent.click(button)
-        })
+  test("should delete one favoriteCard", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardContainersRenderWithProvider movieList={movieDatas} />);
+    const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i);
+    addToFavoriteButtons.forEach((button) => {
+      fireEvent.click(button);
+    });
 
-        const deleteButtons = screen.getAllByText(/delete/i)
-        
-        expect(deleteButtons.length).toBe(3)
-    })
+    const deleteButtons = screen.getAllByText(/delete/i);
+    fireEvent.click(deleteButtons[1]);
+    const deleteButtonOne = screen.getByText(/sure/i);
+    fireEvent.click(deleteButtonOne);
+    const favoriteCard = screen.getAllByTestId(/favoritecard-/i);
 
-    test("should delete one favoriteCard" , ()=> {
-        localStorage.removeItem("movielligent");
-        render(<CardContainersRenderWithProvider movieList={movieDatas} />);
-        const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i)       
-        addToFavoriteButtons.forEach(button => {
-            fireEvent.click(button)
-        })
-
-        const deleteButtons = screen.getAllByText(/delete/i)
-        fireEvent.click(deleteButtons[1])
-        const deleteButtonOne = screen.getByText(/sure/i)
-        fireEvent.click(deleteButtonOne)
-        const favoriteCard = screen.getAllByTestId(/favoritecard-/i)
-
-        expect(favoriteCard.length).toBe(2)
-    })
-
-
-    
-})
+    expect(favoriteCard.length).toBe(2);
+  });
+});

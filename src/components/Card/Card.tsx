@@ -4,35 +4,28 @@ import { addMovieToLocalStorage } from "../../services/localStorageHandler";
 import placeholderPic from "../../img/movieNotFound.jpg";
 
 import { useDispatch } from "react-redux";
-import {  changeState } from "../../store/reducers";
+import { changeState } from "../../store/reducers";
 
 interface CardProps {
   movieData: oneMovie;
-  iterator: number
+  iterator: number;
 }
 
 export const Card: React.FC<CardProps> = (props) => {
   const dispatch = useDispatch();
 
   const addToFavorite = (cardData: oneMovie) => {
-    //console.log("add favorite s")
     const response = addMovieToLocalStorage(cardData);
-
     dispatch(changeState(Number(response.length)));
-
-    //console.log(response)
   };
-
-  // start
 
   return (
     <div className="cardOuter">
-      <div className="cardTitle" >{props.movieData.title}</div>
+      <div className="cardTitle">{props.movieData.title}</div>
 
-  
       <div className="movieYear">
         {props.movieData.release_date?.slice(0, 4)}
-        </div>
+      </div>
 
       <div className="cardPicContainer">
         {props.movieData.poster_path ? (
@@ -42,12 +35,16 @@ export const Card: React.FC<CardProps> = (props) => {
             alt={`moviePoster-${props.movieData.poster_path}`}
           />
         ) : (
-          <img className="cardPosterPic" src={placeholderPic} alt="placeholderPic" />
+          <img
+            className="cardPosterPic"
+            src={placeholderPic}
+            alt="placeholderPic"
+          />
         )}
       </div>
 
       <div
-        data-testid={`moviecard-button-${props.iterator}`}
+        data-testid={`moviecard-button-${props}`}
         className="favoriteButton"
         onClick={() => addToFavorite(props.movieData)}
       >

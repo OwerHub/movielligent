@@ -1,26 +1,26 @@
 import "./dist/footer.css";
 
-// redux toolkit
-
 interface footerPorp {
   pageSetter: (page: number) => void;
-  actualPage?: number ;
+  actualPage?: number;
   maxPage?: number;
 }
 
-export const Footer = ({actualPage=0, maxPage=0, pageSetter}: footerPorp ) => {
+export const Footer = ({
+  actualPage = 0,
+  maxPage = 0,
+  pageSetter,
+}: footerPorp) => {
   const arrayGenarator = (min: number, max: number) => {
     return Array(max - min + 1)
       .fill(0)
       .map((_, i) => min + i);
   };
 
-  // ötöt  és kettőt elnevezni, hogy tudjuk 
-
-// asnumber    
-
-
-  const paginatorArrayGenerator = (actualPage: number =0, maxPage: number =0) => {
+  const paginatorArrayGenerator = (
+    actualPage: number = 0,
+    maxPage: number = 0
+  ) => {
     if (maxPage <= 5) {
       return arrayGenarator(1, maxPage);
     }
@@ -41,13 +41,11 @@ export const Footer = ({actualPage=0, maxPage=0, pageSetter}: footerPorp ) => {
   };
 
   const maxChecker = () => {
-    return (
-      maxPage  > 5 &&
-      actualPage + 2 < maxPage )
+    return maxPage > 5 && actualPage + 2 < maxPage;
   };
 
   const minChecker = () => {
-    return maxPage  > 5 && actualPage  > 3;
+    return maxPage > 5 && actualPage > 3;
   };
 
   return (
@@ -58,27 +56,24 @@ export const Footer = ({actualPage=0, maxPage=0, pageSetter}: footerPorp ) => {
         </div>
         <div className="buttonWrapper">
           {propChecker(actualPage, maxPage) &&
-            paginatorArrayGenerator(
-              actualPage ,
-              maxPage 
-            ).map((pagenumber, iterator) => (
-              <div
-                data-testid={`pageButton-${iterator}`}
-                className={` pageButton ${
-                  pagenumber === actualPage && "selectedButton"
-                }`}
-                key={`pageButton${pagenumber}`}
-                onClick={() => pageSetter(pagenumber)}
-              >
-                {pagenumber}
-              </div>
-            ))}
+            paginatorArrayGenerator(actualPage, maxPage).map(
+              (pagenumber, iterator) => (
+                <div
+                  data-testid={`pageButton-${iterator}`}
+                  className={` pageButton ${
+                    pagenumber === actualPage && "selectedButton"
+                  }`}
+                  key={`pageButton${pagenumber}`}
+                  onClick={() => pageSetter(pagenumber)}
+                >
+                  {pagenumber}
+                </div>
+              )
+            )}
         </div>
 
         <div className="endMakers">
-          {maxChecker() && (
-            <div data-testid="endMarker">. . . {maxPage}</div>
-          )}
+          {maxChecker() && <div data-testid="endMarker">. . . {maxPage}</div>}
         </div>
       </div>
     </div>

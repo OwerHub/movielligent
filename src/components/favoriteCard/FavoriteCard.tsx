@@ -4,9 +4,9 @@ import "./dist/favoriteCard.css";
 import { deleteMovieFromList } from "../../services/localStorageHandler";
 import placeholderPic from "../../img/movieNotFound.jpg";
 
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
-import { increment, decrement, changeState } from "../../store/reducers";
+import { useDispatch } from "react-redux";
+
+import { changeState } from "../../store/reducers";
 
 interface FavoriteCardProps {
   movieData: oneMovie;

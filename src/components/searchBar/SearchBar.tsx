@@ -11,10 +11,7 @@ export const SearchBar = (props: searchBarProps) => {
 
   const searchButtonHandler = (text:string) => {
 
-   /*  console.log(isSearchtext.length >3) */
     if(text.length>3) {
-
-      /* console.log("search pushed"); */
       props.searchFunction(text);
     } 
 
@@ -28,7 +25,6 @@ export const SearchBar = (props: searchBarProps) => {
   return (
     <div className="searchBarContainer">
       <div className="searchWrapper">
-        {/* <div>Search a movie</div> */}
         <input
           type="text"
           name="searchInput"
@@ -43,13 +39,6 @@ export const SearchBar = (props: searchBarProps) => {
           search
         </button>
       </div>
-
-  {/*     <div className="checkboxWrapper">
-        <div>
-          <span>Valami más</span>
-          <input type="checkbox" name="adultCheck" />
-        </div>
-      </div> */}
     </div>
   );
 };

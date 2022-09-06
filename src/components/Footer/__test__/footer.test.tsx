@@ -47,7 +47,7 @@ describe("Footer", () => {
     expect(buttonElement).not.toHaveClass("selectedButton");
   });
 
-  test("should the pressed button give back a right number ", () => {
+  test("should the pressed button give back a right number", () => {
     let getBackNumber: number = 0;
 
     render(

@@ -37,7 +37,6 @@ export const Sidebar = () => {
   }, [useSelector((state: RootState) => state.counter.value)]);
 
   useEffect(() => {
-    //setLocalToMovieList();
     if (getLocalStorage()) {
       arrayLengthChange(getLocalStorage().length);
     } else {
@@ -50,7 +49,6 @@ export const Sidebar = () => {
   return (
     <div className="sideBarContainer">
       Favorites
-     {/*  <button onClick={() => setLocalToMovieList()}>refresh</button> */}
       {isMovieList &&
         isMovieList.map((movie, iterator) => (
           <FavoriteCard key={`FavoriteCard${movie.id}`} iterator={iterator} movieData={movie} />

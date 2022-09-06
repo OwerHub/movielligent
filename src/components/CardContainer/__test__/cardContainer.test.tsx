@@ -22,7 +22,7 @@ const RenderWithProvider: React.FC<cardContainerProps> = ({
   );
 };
 
-describe("cardContainer ", () => {
+describe("should render cardContainer", () => {
   test("should not render cards when the movieArray is null", () => {
     render(<RenderWithProvider />);
     const divElement = screen.queryByText(/favorite/i);
@@ -35,7 +35,7 @@ describe("cardContainer ", () => {
     expect(divElement).toBeInTheDocument();
   });
 
-  test("should render 3 cards when it given 3 movie ", () => {
+  test("should render 3 cards when it given 3 movie", () => {
     render(<RenderWithProvider dummyMovieList={movieDatas} />);
     const favoriteButtons = screen.getAllByText(/Add to favorite/i);
     expect(favoriteButtons.length).toBe(3);
