@@ -1,39 +1,33 @@
+@import "../../style_basics/colors";
+
 .appContainer{
     box-sizing: border-box;
 }
 
 header{
-    background-color: red;
+    background-color: $dilligent-red2;
     position: fixed;
     z-index: 10;
     top: 0;
-    height:10vh;
+    height:14vh;
     width: 100vw;
-    display: flex;
+display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 5px 0;
 }
 
-.body{
-    background-color: brown;
+.appBody{
+    //background-color:
     padding: 1rem 0 0;
-    margin: 9vh 0 0 0;
+    margin: 11vh 0 0 0;
     min-height:89vh;
     display: flex;
     //justify-content: space-around;
 
 }
 
-/* .sidebar{
-    position: fixed;
-    top:11vh;
-    right: 0;
-    width: 20vw;
-    background-color: purple;
-    min-height: 76vh;
-}
- */
+
 footer{
- background-color: rgb(214, 221, 255);
+ background-color: $carolina-blue
 }

@@ -1,9 +1,25 @@
 .searchBarContainer {
-  background-color: yellow;
+  margin: 0.5rem 0;
   display: flex;
   justify-content: space-around;
 }
 .searchBarContainer .searchWrapper {
   display: flex;
   gap: 2rem;
+}
+
+input {
+  height: 1.3rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button {
+  height: 1.4rem;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

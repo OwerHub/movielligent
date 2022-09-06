@@ -1,5 +1,6 @@
 .cardOuter {
-  background-color: darkred;
+  background-color: #F7DBA7;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
   width: 20vw;
   min-width: 200px;
   padding: 1rem 0.2rem;
@@ -35,11 +36,12 @@
 .favoriteButton {
   padding: 0.5rem;
   border-radius: 0.3rem;
-  background-color: red;
+  background-color: #f03834;
   cursor: pointer;
   transition: 0.2s;
+  color: black;
 }
 .favoriteButton:hover {
-  color: whitesmoke;
+  color: #640101;
   transform: translate(2px, 2px);
 }

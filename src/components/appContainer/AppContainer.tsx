@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from "react";
 import {
   movieResponse,
@@ -102,7 +104,7 @@ export const AppContainer = () => {
         />
       </header>
 
-      <section className="body">
+      <section className="appBody">
         <CardContainer movieList={isMovies?.results} />
         <Sidebar />
       </section>

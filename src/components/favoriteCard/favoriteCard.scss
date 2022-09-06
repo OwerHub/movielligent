@@ -1,3 +1,5 @@
+@import "../../style_basics/colors";
+
 .favoriteCardWrapper{
     width: 80%;
     margin: 10% .5rem 0 ;
@@ -21,14 +23,14 @@
 
 .deleteFavoriteButton{
     margin: .5rem 0;
-    background-color: rgb(255, 144, 144);
+    background-color: $dilligent-red1;
     padding: .5rem;
     border-radius: .5rem;
     cursor: pointer;
     transition: s .2s;
     &:hover{
-        background-color: red;
-        transform: scale(1.1);
+        color: whitesmoke;
+        transform: translate(2px, 2px)
     }
 }
 

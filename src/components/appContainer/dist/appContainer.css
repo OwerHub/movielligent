@@ -3,35 +3,25 @@
 }
 
 header {
-  background-color: red;
+  background-color: #b82e34;
   position: fixed;
   z-index: 10;
   top: 0;
-  height: 10vh;
+  height: 14vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 5px 0;
 }
 
-.body {
-  background-color: brown;
+.appBody {
   padding: 1rem 0 0;
-  margin: 9vh 0 0 0;
+  margin: 11vh 0 0 0;
   min-height: 89vh;
   display: flex;
 }
 
-/* .sidebar{
-    position: fixed;
-    top:11vh;
-    right: 0;
-    width: 20vw;
-    background-color: purple;
-    min-height: 76vh;
-}
- */
 footer {
-  background-color: #d6ddff;
+  background-color: #4EA5D9;
 }

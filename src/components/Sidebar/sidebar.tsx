@@ -48,7 +48,10 @@ export const Sidebar = () => {
 
   return (
     <div className="sideBarContainer">
+      <div className="sideHeader">
+
       Favorites
+      </div>
       {isMovieList &&
         isMovieList.map((movie, iterator) => (
           <FavoriteCard key={`FavoriteCard${movie.id}`} iterator={iterator} movieData={movie} />
