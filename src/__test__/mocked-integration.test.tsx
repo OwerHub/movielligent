@@ -18,10 +18,11 @@ describe("mocked integration tests" , ()=>{
         render(<AppContainerWithProvider/>)
 
         const searchInput = screen.getByPlaceholderText(/enter the title/i)
-
+        const searchButton = screen.getByText(/search/i)
         fireEvent.change(searchInput, { target: { value: "V for Vendetta" } })
+        fireEvent.click(searchButton)
 
-        const addToFavoriteButton = screen.getByText(/favorite/i)
-        expect(addToFavoriteButton).toBeInTheDocument()
+        const addToFavoriteButton = screen.getByText(/add to favorite/i)
+        expect(searchButton).toBeInTheDocument()
     })
 })

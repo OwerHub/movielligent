@@ -28,7 +28,7 @@ export const SearchBar = (props: searchBarProps) => {
   return (
     <div className="searchBarContainer">
       <div className="searchWrapper">
-        <div>Search a movie</div>
+        {/* <div>Search a movie</div> */}
         <input
           type="text"
           name="searchInput"
