@@ -22,3 +22,9 @@ export interface movieResponse {
     total_results: number
 }
 
+export interface cachedSearchType {
+    searchText: string
+    pageNumber: number
+    searchResponse: movieResponse
+
+}

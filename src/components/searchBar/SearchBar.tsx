@@ -2,33 +2,26 @@ import { useState } from "react";
 import "./dist/searchbar.css";
 
 interface searchBarProps {
-  searchTextSetter: (searchText: string) => void;
-  searchFunction: () => void;
+  searchTextSetter?: (searchText: string) => void;
+  searchFunction: (searchText: string) => void;
 }
 
 export const SearchBar = (props: searchBarProps) => {
   const [isSearchtext, setSearchText] = useState<string>("");
 
-  const searchButtonHandler = () => {
+  const searchButtonHandler = (text:string) => {
 
    /*  console.log(isSearchtext.length >3) */
-    if(isSearchtext.length>3) {
+    if(text.length>3) {
 
       /* console.log("search pushed"); */
-      props.searchFunction();
+      props.searchFunction(text);
     } 
 
   };
 
   const enterHandle = () =>  {
-    searchButtonHandler()
-  };
-
-
-  const inputChangeHandler = (searchText: string) => {
-    //console.log(searchText)
-    setSearchText(searchText);
-    props.searchTextSetter(searchText);
+    searchButtonHandler(isSearchtext)
   };
 
 
@@ -39,11 +32,11 @@ export const SearchBar = (props: searchBarProps) => {
         <input
           type="text"
           name="searchInput"
-          onChange={(e) => inputChangeHandler(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && enterHandle()  }
         />
         <button
-          onClick={() => searchButtonHandler()}
+          onClick={() => searchButtonHandler(isSearchtext)}
           disabled={isSearchtext.length <= 3}
         >
           search

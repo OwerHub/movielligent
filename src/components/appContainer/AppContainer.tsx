@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { movieResponse, oneMovie } from "../../types/movietypes";
+import {
+  movieResponse,
+  oneMovie,
+  cachedSearchType,
+} from "../../types/movietypes";
 import "./dist/appContainer.css";
 //import searchJson from "../../datas/searches.json";
 
@@ -10,6 +14,7 @@ import { Footer } from "../Footer/Footer";
 import { Sidebar } from "../Sidebar/sidebar";
 import { HeadTitle } from "../HeadTitle/HeadTitle";
 import { LoadingSpinner } from "../LoadngSpinner/LoadingSpinner";
+import { setTextRange } from "typescript";
 
 export const AppContainer = () => {
   //localStorage.removeItem('movielligent');
@@ -21,25 +26,44 @@ export const AppContainer = () => {
   const [isLoading, setLoading] = useState(false);
   // Redux-toolkit input state
 
-  const getData = async () => {
-    setLoading(true)
-    const data = await getSearchedMovies<movieResponse>({
-      searchText: isSeachText,
+  const [isCacheSearches, setCacheSearches] = useState<cachedSearchType | []>(
+    []
+  );
+  const [isPreviousSearchKey, setPreviousSearchKey] = useState<string>("");
+
+  const getData = async (searchtext:string| undefined) => {
+    setLoading(true);
+
+    let actualSearchtext: string
+
+    if(searchtext === undefined) {
+      actualSearchtext = isSeachText
+    }  else {
+      actualSearchtext = searchtext
+    }
+
+    let foundSearchInCached: cachedSearchType | undefined;
+
+    const data: movieResponse = await getSearchedMovies<movieResponse>({
+      searchText: actualSearchtext,
       actualPage: isPage,
     });
-    setmMovies(data);
-    setLoading(false)
 
+    setmMovies(data);
+    setLoading(false);
   };
 
-  const searchMovies = (): void => {
+
+  const searchButtonHandler = (searchText:string): void => {
+
+    setSearchText(searchText)
     setPage(1);
-    getData();
+    getData(searchText);
   };
 
   useEffect(() => {
     if (isPage > 0) {
-      getData();
+      getData(undefined);
     }
   }, [isPage]);
 
@@ -48,12 +72,12 @@ export const AppContainer = () => {
       <header>
         <HeadTitle />
         <SearchBar
-          searchTextSetter={(searchText) => {
-            if(searchText.length>3){
+       /*    searchTextSetter={(searchText) => {
+            if (searchText.length > 3) {
               setSearchText(searchText);
             }
-          }}
-          searchFunction={() => searchMovies()}   // simán át lehet adni 
+          }} */
+          searchFunction={(searchText) => searchButtonHandler(searchText)} // simán át lehet adni
         />
       </header>
 
@@ -74,8 +98,7 @@ export const AppContainer = () => {
         )}
       </footer>
 
-
-    {isLoading &&  <LoadingSpinner/>}
+      {isLoading && <LoadingSpinner />}
     </div>
   );
 };
