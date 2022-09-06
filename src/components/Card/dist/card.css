@@ -42,6 +42,6 @@
   color: black;
 }
 .favoriteButton:hover {
-  color: #640101;
+  color: whitesmoke;
   transform: translate(2px, 2px);
 }

@@ -1,13 +1,6 @@
-
-
 import { useState, useEffect } from "react";
-import {
-  movieResponse,
-  oneMovie,
-  cachedSearchType,
-} from "../../types/movietypes";
+import { movieResponse, cachedSearchType } from "../../types/movietypes";
 import "./dist/appContainer.css";
-//import searchJson from "../../datas/searches.json";
 
 import { getSearchedMovies } from "../../services/fetch";
 import { SearchBar } from "../searchBar/SearchBar";
@@ -18,15 +11,10 @@ import { HeadTitle } from "../HeadTitle/HeadTitle";
 import { LoadingSpinner } from "../LoadngSpinner/LoadingSpinner";
 
 export const AppContainer = () => {
-  //localStorage.removeItem('movielligent');
-
   const [isMovies, setmMovies] = useState<movieResponse>();
   const [isSeachText, setSearchText] = useState<string>("");
-
   const [isPage, setPage] = useState(0);
   const [isLoading, setLoading] = useState(false);
-  // Redux-toolkit input state
-
   const [isCacheSearches, setCacheSearches] = useState<cachedSearchType[]>([]);
 
   const watchSearchTextUndefined = (searchText: string | undefined) => {
@@ -62,7 +50,6 @@ export const AppContainer = () => {
     }
 
     if (foundSearchInCached?.searchResponse !== undefined) {
-      console.log("i find it")
       setmMovies(foundSearchInCached.searchResponse);
       setLoading(false);
     }
