@@ -27,7 +27,7 @@ export const AppContainer = () => {
 
   const [isCacheSearches, setCacheSearches] = useState<cachedSearchType[]>([]);
 
-  const getData = async (searchtext: string | undefined) => {
+  const gettingDataHandler = async (searchtext: string | undefined) => {
     setLoading(true);
 
     // ez még kiszervezhető
@@ -40,8 +40,7 @@ export const AppContainer = () => {
 
     ///----
 
-
-    /// Ez is 
+    /// Ez is
     let foundSearchInCached: cachedSearchType | undefined;
 
     if (isCacheSearches.length !== 0) {
@@ -53,7 +52,6 @@ export const AppContainer = () => {
     }
     //-----
 
-
     /// maradhat
     if (foundSearchInCached?.searchResponse !== undefined) {
       setmMovies(foundSearchInCached.searchResponse);
@@ -61,8 +59,6 @@ export const AppContainer = () => {
     }
 
     if (foundSearchInCached === undefined) {
-      
-      
       // megint csak kiszervezhető
       const data: movieResponse = await getSearchedMovies<movieResponse>({
         searchText: actualSearchtext,
@@ -82,19 +78,18 @@ export const AppContainer = () => {
       setLoading(false);
 
       // eddig
-
     }
   };
 
   const searchButtonHandler = (searchText: string): void => {
     setSearchText(searchText);
     setPage(1);
-    getData(searchText);
+    gettingDataHandler(searchText);
   };
 
   useEffect(() => {
     if (isPage > 0) {
-      getData(undefined);
+      gettingDataHandler(undefined);
     }
   }, [isPage]);
 
