@@ -13,7 +13,7 @@ export const CardContainer = (props: cardContainerProps) => {
       {props.movieList ? (
         <div className="cardWrapper">
           {props.movieList.map((data, iterator)=> (
-            <Card movieData={data} key={`card${iterator}`}/>    
+            <Card movieData={data} key={`card${iterator}`} iterator={iterator}/>    
           ))}
         </div>
       ) : (

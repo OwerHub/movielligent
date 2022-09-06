@@ -1,65 +1,129 @@
-import {Card} from "../components/Card/Card";
+import { render, screen, fireEvent } from "@testing-library/react";
+
+import { Card } from "../components/Card/Card";
 import { Sidebar } from "../components/Sidebar/sidebar";
-
-import { render, screen , fireEvent } from '@testing-library/react';
 import { oneMovie } from "../components/../types/movietypes";
-
-import { Provider } from 'react-redux'
-import {store} from "../components/../store/store"
-
+import { CardContainer } from "../components/CardContainer/CardContainer";
+import { movieDatas } from "../datas/testDatas";
 
 
-const movieObject:oneMovie = {
-    "adult": false,
-    "backdrop_path": "/fv4XvbQW2NDEXV8Zdxhmv0wHuu3.jpg",
-    "genre_ids": [
-      28,
-      53,
-      14
-    ],
-    "id": 752,
-    "original_language": "en",
-    "original_title": "V for Vendetta",
-    "overview": "In a world in which Great Britain has become a fascist state, a masked vigilante known only as “V” conducts guerrilla warfare against the oppressive British government. When V rescues a young woman from the secret police, he finds in her an ally with whom he can continue his fight to free the people of Britain.",
-    "popularity": 63.755,
-    "poster_path": "/2ySXWBckQboalTZjhaLWRqc3gCN.jpg",
-    "release_date": "2006-02-23",
-    "title": "V for Vendetta",
-    "video": false,
-    "vote_average": 7.9,
-    "vote_count": 12510
+import { Provider } from "react-redux";
+import { store } from "../components/../store/store";
+
+interface cardsRenderProps {
+  movie: oneMovie;
 }
 
-interface renderProps {
-    movie: oneMovie
+interface cardContainersRenderProps {
+    movieList: oneMovie[]
 }
 
-const RenderWithProvider:React.FC<renderProps> = ({movie}) => {
-    return(
-        <Provider store={store}>
-                <Card movieData={movie}/>
-                <Sidebar/>
-        </Provider>
-    )
-}
+const CardsRenderWithProvider: React.FC<cardsRenderProps> = ({ movie }) => {
+  return (
+    <Provider store={store}>
+      <Card iterator={0} movieData={movie} />
+      <Sidebar />
+    </Provider>
+  );
+};
 
-test("render MovieCard " , ()=> {
-    render(<RenderWithProvider movie={movieObject}/>)
+const CardContainersRenderWithProvider: React.FC<cardContainersRenderProps> = ({ movieList }) => {
+    return (
+      <Provider store={store}>
+        <CardContainer movieList={movieList} />
+        <Sidebar />
+      </Provider>
+    );
+  };
+
+
+describe("actionBetweenCards", () => {
+
+  test("should not render favoriteCard, when the localstorage empty", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardsRenderWithProvider movie={movieDatas[0]} />);
+
+    const favoriteCardButton = screen.queryByText(/delete this card/i);
+    expect(favoriteCardButton).not.toBeInTheDocument();
+  });
+
+  test("should render favoriteCard when click add to favorit", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardsRenderWithProvider movie={movieDatas[0]} />);
+
+    const AddToFavoriteButton = screen.getByText(/add to favorite/i);
+    fireEvent.click(AddToFavoriteButton);
+
+    const favoriteCard = screen.getByText(/delete this card/i);
+    expect(favoriteCard).toBeInTheDocument();
+  });
+
+  test("sould not render the card, when press the delete twice", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardsRenderWithProvider movie={movieDatas[0]} />);
+
+    const favoriteButton = screen.getByText(/add to favorite/i);
+    fireEvent.click(favoriteButton);
+
+    const favoriteCardDeleteButton = screen.getByText(/delete this card/i);
+    fireEvent.click(favoriteCardDeleteButton);
+    fireEvent.click(favoriteCardDeleteButton);
+
+    const favoriteCard = screen.queryByTestId("/favoritecard-/i");
+
+    expect(favoriteCard).not.toBeInTheDocument();
+  });
+
+  
+  test("should not add one Moviecard twice to favorite", () => {
+    localStorage.removeItem("movielligent");
+    render(<CardsRenderWithProvider movie={movieDatas[0]} />);
+
+    const AddToFavoriteButton = screen.getByText(/add to favorite/i);
+    fireEvent.click(AddToFavoriteButton);
+    fireEvent.click(AddToFavoriteButton);
+
+    const favoriteCard = screen.getByText(/delete this card/i);
+    expect(favoriteCard).toBeInTheDocument();
+  });
+
+});
+
+
+
+describe("actions between CardContainer and Sidebar" , ()=> {
+
+    test("should add 3 different card to Favorites" , ()=> {
+        localStorage.removeItem("movielligent");
+        render(<CardContainersRenderWithProvider movieList={movieDatas} />);
+
+        const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i)       
+        addToFavoriteButtons.forEach(button => {
+            fireEvent.click(button)
+        })
+
+        const deleteButtons = screen.getAllByText(/delete/i)
+        
+        expect(deleteButtons.length).toBe(3)
+    })
+
+    test("should delete one favoriteCard" , ()=> {
+        localStorage.removeItem("movielligent");
+        render(<CardContainersRenderWithProvider movieList={movieDatas} />);
+        const addToFavoriteButtons = screen.getAllByTestId(/moviecard-button/i)       
+        addToFavoriteButtons.forEach(button => {
+            fireEvent.click(button)
+        })
+
+        const deleteButtons = screen.getAllByText(/delete/i)
+        fireEvent.click(deleteButtons[1])
+        const deleteButtonOne = screen.getByText(/sure/i)
+        fireEvent.click(deleteButtonOne)
+        const favoriteCard = screen.getAllByTestId(/favoritecard-/i)
+
+        expect(favoriteCard.length).toBe(2)
+    })
+
+
     
-    const titleDiv = screen.getByText(/V for Vendetta/i)
-    expect(titleDiv).toBeInTheDocument()
-
-   const favoriteButton = screen.getByText(/add to favorite/i)
-    fireEvent.click(favoriteButton)
- 
-})
-
-test("Render favoriteCard when click add to favorit" , ()=> {
-    render(<RenderWithProvider movie={movieObject}/>)
-
-   const favoriteButton = screen.getByText(/add to favorite/i)
-    fireEvent.click(favoriteButton)
-
-    const favoriteCard = screen.getByText(/delete this card/i)
-    expect(favoriteCard).toBeInTheDocument()
 })

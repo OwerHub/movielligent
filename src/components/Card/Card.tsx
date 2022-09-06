@@ -8,6 +8,7 @@ import {  changeState } from "../../store/reducers";
 
 interface CardProps {
   movieData: oneMovie;
+  iterator: number
 }
 
 export const Card: React.FC<CardProps> = (props) => {
@@ -46,6 +47,7 @@ export const Card: React.FC<CardProps> = (props) => {
       </div>
 
       <div
+        data-testid={`moviecard-button-${props.iterator}`}
         className="favoriteButton"
         onClick={() => addToFavorite(props.movieData)}
       >

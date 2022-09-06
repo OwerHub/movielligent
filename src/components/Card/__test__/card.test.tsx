@@ -15,7 +15,7 @@ interface renderProps {
 const RenderWithProvider: React.FC<renderProps> = ({ movie }) => {
   return (
     <Provider store={store}>
-      <Card movieData={movie} />
+      <Card  iterator={0} movieData={movie} />
     </Provider>
   );
 };
