@@ -3,7 +3,7 @@
 }
 
 header {
-  background-color: #b82e34;
+  background-color: #9d1c20;
   position: fixed;
   z-index: 10;
   top: 0;
@@ -23,5 +23,5 @@ header {
 }
 
 footer {
-  background-color: #4EA5D9;
+  background-color: #b82e34;
 }
