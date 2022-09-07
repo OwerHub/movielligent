@@ -1,4 +1,13 @@
-# ENG
+# Moveilligent 
+
+This is an interesting trial task. I have  connec to moviedatabase, cache the responses,  
+create a favorit-list , store in a localstorage, etc. 
+
+I used typescript, react, redux, and etc. 
+
+A have write to tests, all-level.  Unit and integration test in jest,  e2e test in Cypress.
+This is the first time with Cy, but I love it.. 
+
 
 
 to run this program
