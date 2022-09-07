@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# ENG
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+to run this program
 
-In the project directory, you can run:
+- After clone this repository, type and run :                   npm install
 
-### `npm start`
+- create an .env file, include REACT_APP_API_KEY=<your key> 
+    - you can get a key in https://developers.themoviedb.org/3/getting-started/introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- to run unit- and integration tests, type                      npm tests 
+    - this not working good before node v16
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- to run integration tests, type                                npm e2e
+    - in first time, the test failed in my comp, but its working perfectly since the second test
+    - maybe you should allow acess in your firewall. 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+See ya later, and have a good hacking!
 
-### `npm run build`
+ower
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#  -------------------   HU  -to Dilligent --------------------
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Köszönöm szépen a feladatot, izgalmas kihívásokat tartogatott!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A program működéséhez az alábbi dolgok szükségesek: 
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+https://github.com/OwerHub/movielligent  repository  klónozása
+egy 
+# .env 
+file a gyökérben, amit tartalmaz egy 
+# REACT_APP_API_KEY= 
+kulcsot
+A függőségek installálása 
+# npm i 
+utasítással majd az indítás 
+# npm start  
+utasítással indul el a program
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+a teszteléshez az alábbiakat kell végrehajtani
+# npm test
+paranccsal el kell indítani a jest-ben írt unit és integrációs teszteket. (33 db)
+(megj: tapasztalatom csak NODE 16-tól felfelé indul el az elvárható módon.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# npm e2e 
+paranncsal pedig a Cypress indul el a 12 részre bontott end to end teszteléssel. Itt időnként engedélyezni kell a tűzfalon való áthaladást, illetve a lassúbb asztali gépen tesztelve időtúllépés miatt megszakadt a teszt. A hibát azóta nem sikerült reprodukálni. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Néhány megjegyzés: 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- “Kész program nincs, csak lebulidelt” mondta a mentorom (és milyen igaza volt), így ha időm engedi, még kipróbálnék néhány megoldást, amire a projekt ideális. Ha nem jelent problémát, a jelenlegi állapotot meghagyom a master branch-ben, rewiev-ra, és egy másik branch-ben folytatom. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Néhány esetben nem vagyok biztos, hogy jól -értelmeztem-e a feladatot. A “Search is automatically triggered after at least 3 characters entered”  -nél elsőre olyan keresőt csináltam, ami 3 karakternél hosszabb keresőszó esetén automatikusan keresett, de ez végül nem tűnt életszerűnek, és kényelmetlen volt, így maradt a három karakter után engedélyezett keresés. -A “caching”-et úgy értelmeztem, hogy korábbi kereséseket tároljam el, elkerülve a felesleges requesteket. A három, elsőre felmerülő lehetőség közül (localstorage, redux, state), végül az utóbbi mellett döntöttem, mivel az adat nem mozog komponensek között, és találatok hosszú távú tárolása egy naponta változó lista esetén szintén nem tűnt tökéletes megoldásnak. A “pagination, limits”-nél pedig nem találtam a moviedatabase dokumentációjában olyan kapcsolót, ami szabályozná, a megjelenített elemek számát laponként, így végül egy paginator-t írtam , ahol jobbra és balra megjelenő számok mutatják, elértük-e a “limit”-et. Nem vagyok biztos benne, hogy ez volt  a helyes értelmezés, bár remek alap volt a későbbi teszteléshez. Természetesen bármelyik esetben szívesen elvégzem a változtatásokat a kódon. 
+
+Ahogy írtam, köszönöm szépen a feladatot, számos izgalmas résszel szolgált, A redux és a localstorage átvitelek ilyen kombinálása, nem volt nehéz, de újdonság volt   jest-es emlékek felelevenítése szintén jó gyakorlat volt. Újdonsült ismeretségem a Cypress  testing libary-vel (ami legfőbb oka annak, hogy nem tegnap adtam le ezt a feladatot), pedig azt hiszem, egy gyönyörű barátság kezdete. 
+
+Remélem kódom, megoldásaim elnyerik  tetszésüket (továbbá építő kritikának nagyon örülnék) és izgalommal várom a folyamat következő fázisát.
+
+# Tisztelettel és köszönettel: 
+
+# V.A."
