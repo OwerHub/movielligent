@@ -95,7 +95,7 @@ describe("Add To favorite", () => {
   });
 });
 
-describe.only("paginatorTests", () => {
+describe("paginatorTests", () => {
   beforeEach(() => {
     cy.visit("localhost:3000");
     cy.get("input").type("blood");

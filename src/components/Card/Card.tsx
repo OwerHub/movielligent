@@ -21,7 +21,7 @@ export const Card: React.FC<CardProps> = (props) => {
 
   return (
     <div className="cardOuter">
-      <div className="(cardTitle)">{props.movieData.title}</div>
+      <div className="cardTitle">{props.movieData.title}</div>
 
       <div className="movieYear">
         {props.movieData.release_date?.slice(0, 4)}
